@@ -1,12 +1,18 @@
 import React from 'react'
 import PokemonList from '@/components/pokemon/PokemonList'
+import { Header } from '@/components/header/Header'
+import { Footer } from '@/components/footer/Footer'
 
 const Dashboard: React.FC = () => {
     return (
-        <div>
-            <h1>Pokémon Page</h1>
-            <PokemonList />
-        </div>
+        <>
+            <Header />
+            <div>
+                <h1>Pokémon Page</h1>
+                <PokemonList />
+            </div>
+            <Footer />
+        </>
     )
 }
 

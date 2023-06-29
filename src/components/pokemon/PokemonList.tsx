@@ -1,27 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import { fetchPokemonList } from '@/services/pokemonApi'
+import { Card, CardContent, CardMedia, Typography } from '@mui/material'
 import Pokemon from './interface/pokemon.interface'
 
 const PokemonList: React.FC = () => {
     const [pokemonList, setPokemonList] = useState<Pokemon[]>([])
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchPokemons = async () => {
             const data = await fetchPokemonList()
             setPokemonList(data.results)
         }
-
-        fetchData()
+        fetchPokemons()
     }, [])
 
     return (
         <div>
             <h1>Pokémon List</h1>
-            <ul>
+            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                 {pokemonList.map((pokemon) => (
-                    <li key={pokemon.id}>{pokemon.name}</li>
+                    <Card key={pokemon.id} sx={{ width: 200, margin: 10 }}>
+                        <CardContent>
+                            <Typography variant="h6" component="div">
+                                {pokemon.name}
+                            </Typography>
+                        </CardContent>
+                    </Card>
                 ))}
-            </ul>
+            </div>
         </div>
     )
 }
