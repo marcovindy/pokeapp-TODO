@@ -2,10 +2,10 @@ import axios, { AxiosResponse } from 'axios'
 
 const BASE_URL = 'https://pokeapi.co/api/v2'
 
-export const fetchPokemonList = async (startId: number, endId: number): Promise<any> => {
+export const fetchPokemonList = async (pokemonOffset: number, pokemonLimit: number): Promise<any> => {
     try {
         const response: AxiosResponse<any> = await axios.get(
-            `${BASE_URL}/pokemon?limit=${endId - startId + 1}&offset=${startId - 1}`,
+            `${BASE_URL}/pokemon?limit=${pokemonLimit - pokemonOffset + 1}&offset=${pokemonOffset - 1}`,
         )
         return response.data
     } catch (error) {
