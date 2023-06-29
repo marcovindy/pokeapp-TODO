@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { fetchPokemonList, fetchPokemonById } from '@/services/pokemonApi'
-import { Card, CardContent, CardMedia, Typography } from '@mui/material'
+import styled from 'styled-components'
 import Pokemon from './interface/pokemon.interface'
-import axios, { AxiosResponse } from 'axios'
+import PokemonCard from './PokemonCard'
+
+const PokemonListContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`
 
 const PokemonList: React.FC = () => {
     const [pokemons, setPokemons] = useState<Pokemon[]>([])
@@ -25,17 +30,11 @@ const PokemonList: React.FC = () => {
     return (
         <div>
             <h1>Pokémon List</h1>
-            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+            <PokemonListContainer>
                 {pokemons.map((pokemon) => (
-                    <Card key={pokemon.id} sx={{ width: 200, margin: 10 }}>
-                        <CardContent>
-                            <Typography variant="h6" component="div">
-                                {pokemon.name}
-                            </Typography>
-                        </CardContent>
-                    </Card>
+                    <PokemonCard key={pokemon.id} pokemon={pokemon} />
                 ))}
-            </div>
+            </PokemonListContainer>
         </div>
     )
 }
