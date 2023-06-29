@@ -21,7 +21,7 @@
     "@mui/styled-engine-sc": "^5.11.0",
     "@nivo/pie": "^0.80.0",
     "@reduxjs/toolkit": "^1.8.5",
-    "axios": "^0.27.2",
+    "axios": "^1.4.0",
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.5",
     "formik": "^2.2.9",
