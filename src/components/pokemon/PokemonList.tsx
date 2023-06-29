@@ -7,6 +7,7 @@ import PokemonCard from './PokemonCard'
 const PokemonListContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 `
 
 const PokemonList: React.FC = () => {
