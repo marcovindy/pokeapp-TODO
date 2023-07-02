@@ -41,7 +41,7 @@ export const Header = () => {
                 </Stack>
                 <Stack direction="row" spacing={2}>
                     <Link to="/dashboard" style={{ textDecoration: 'none', color: 'inherit' }}>
-                        Dashboard
+                        Dashboard/Poke
                     </Link>
                     <Link to="/todolist" style={{ textDecoration: 'none', color: 'inherit' }}>
                         TODOLIST

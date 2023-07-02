@@ -9,10 +9,6 @@ type PokemonDetailParams = {
 const PokemonDetail: React.FC = () => {
     const { id } = useParams<PokemonDetailParams>()
 
-    const handleGoBack = () => {
-        // Implementace přesměrování zpět
-    }
-
     return (
         <div>
             <h1>Pokémon Detail</h1>
