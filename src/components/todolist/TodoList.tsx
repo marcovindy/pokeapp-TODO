@@ -3,7 +3,18 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/redux/store'
 import { addTodo, toggleTodo, removeTodo, selectTodos } from '@/redux/todoSlice'
 import { TodoItem } from '@/components/todolist/interface/TodoItem.interface'
-import { Button, TextField } from '@mui/material'
+import {
+    Button,
+    TextField,
+    Checkbox,
+    Typography,
+    List,
+    ListItem,
+    ListItemText,
+    ListItemSecondaryAction,
+    IconButton,
+} from '@mui/material'
+import { Delete } from '@mui/icons-material'
 
 const TodoList: React.FC = () => {
     const [newTodo, setNewTodo] = useState('')
@@ -55,17 +66,33 @@ const TodoList: React.FC = () => {
                 <TextField label="Name" value={newTodo} onChange={handleInputChange} />
                 <TextField label="Description" value={newDescription} onChange={handleDescriptionChange} />
                 <TextField type="datetime-local" label="Time" value={newTime} onChange={handleTimeChange} />
-                <Button onClick={handleAddTodo}>Add Todo</Button>
+                <Button variant="contained" onClick={handleAddTodo}>
+                    Add Todo
+                </Button>
             </div>
-            <ul>
+            <List>
                 {todos.map((todo) => (
-                    <li key={todo.id}>
-                        <input type="checkbox" checked={todo.completed} onChange={() => handleToggleTodo(todo.id)} />
-                        <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>{todo.name}</span>
-                        <Button onClick={() => handleRemoveTodo(todo.id)}>Remove</Button>
-                    </li>
+                    <ListItem key={todo.id}>
+                        <Checkbox checked={todo.completed} onChange={() => handleToggleTodo(todo.id)} />
+                        <ListItemText
+                            primary={
+                                <Typography
+                                    variant="body1"
+                                    style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
+                                >
+                                    {todo.name}
+                                </Typography>
+                            }
+                            secondary={todo.description}
+                        />
+                        <ListItemSecondaryAction>
+                            <IconButton edge="end" aria-label="delete" onClick={() => handleRemoveTodo(todo.id)}>
+                                <Delete />
+                            </IconButton>
+                        </ListItemSecondaryAction>
+                    </ListItem>
                 ))}
-            </ul>
+            </List>
         </div>
     )
 }
