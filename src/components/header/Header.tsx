@@ -7,12 +7,14 @@ import Brightness7Icon from '@mui/icons-material/Brightness7'
 import { useNavigate } from 'react-router-dom'
 import { AccountCircle } from '@mui/icons-material'
 import { ThemeSwitchContext } from '@/theme/theme'
+import { Link } from 'react-router-dom'
 
 export const Header = () => {
     const themeMaterial = useTheme()
     const dispatch = useAppDispatch()
     const { toggleColorMode } = useContext(ThemeSwitchContext)
     const navigate = useNavigate()
+
     return (
         <AppBar position="static">
             <Toolbar
@@ -36,6 +38,14 @@ export const Header = () => {
                     >
                         <AccountCircle />
                     </IconButton>
+                </Stack>
+                <Stack direction="row" spacing={2}>
+                    <Link to="/dashboard" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        Dashboard
+                    </Link>
+                    <Link to="/todolist" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        TODOLIST
+                    </Link>
                 </Stack>
                 {themeMaterial.palette.mode} mode
                 <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color="inherit">

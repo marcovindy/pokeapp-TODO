@@ -1,7 +1,8 @@
 import { combineReducers } from '@reduxjs/toolkit'
+import todosReducer from './todoSlice'
 
 export const rootReducer = combineReducers({
-    //your TODO should go here
+    todos: todosReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>
