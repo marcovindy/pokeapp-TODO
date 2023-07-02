@@ -3,10 +3,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/redux/store'
 import { addTodo, toggleTodo, removeTodo, selectTodos } from '@/redux/todoSlice'
 import { TodoItem } from '@/components/todolist/interface/TodoItem.interface'
-import { Button } from '@mui/material'
+import { Button, TextField } from '@mui/material'
 
 const TodoList: React.FC = () => {
     const [newTodo, setNewTodo] = useState('')
+    const [newDescription, setNewDescription] = useState('')
+    const [newTime, setNewTime] = useState('')
 
     const todos = useSelector(selectTodos)
     const dispatch = useDispatch()
@@ -15,15 +17,27 @@ const TodoList: React.FC = () => {
         setNewTodo(e.target.value)
     }
 
+    const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewDescription(e.target.value)
+    }
+
+    const handleTimeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewTime(e.target.value)
+    }
+
     const handleAddTodo = () => {
         if (newTodo.trim() !== '') {
             const todo: TodoItem = {
                 id: Date.now(),
-                text: newTodo,
+                name: newTodo,
+                description: newDescription,
+                time: newTime,
                 completed: false,
             }
             dispatch(addTodo(todo))
             setNewTodo('')
+            setNewDescription('')
+            setNewTime('')
         }
     }
 
@@ -38,14 +52,16 @@ const TodoList: React.FC = () => {
     return (
         <div>
             <div>
-                <input type="text" value={newTodo} onChange={handleInputChange} />
+                <TextField label="Name" value={newTodo} onChange={handleInputChange} />
+                <TextField label="Description" value={newDescription} onChange={handleDescriptionChange} />
+                <TextField type="datetime-local" label="Time" value={newTime} onChange={handleTimeChange} />
                 <Button onClick={handleAddTodo}>Add Todo</Button>
             </div>
             <ul>
                 {todos.map((todo) => (
                     <li key={todo.id}>
                         <input type="checkbox" checked={todo.completed} onChange={() => handleToggleTodo(todo.id)} />
-                        <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>{todo.text}</span>
+                        <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>{todo.name}</span>
                         <Button onClick={() => handleRemoveTodo(todo.id)}>Remove</Button>
                     </li>
                 ))}

@@ -15,11 +15,7 @@ const todosSlice = createSlice({
     initialState,
     reducers: {
         addTodo: (state, action) => {
-            const todo: TodoItem = {
-                id: Date.now(),
-                text: action.payload.text,
-                completed: false,
-            }
+            const todo: TodoItem = action.payload
             state.todos.push(todo)
         },
         toggleTodo: (state, action) => {
