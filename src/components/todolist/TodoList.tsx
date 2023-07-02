@@ -3,18 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/redux/store'
 import { addTodo, toggleTodo, removeTodo, selectTodos } from '@/redux/todoSlice'
 import { TodoItem } from '@/components/todolist/interface/TodoItem.interface'
-import {
-    Button,
-    TextField,
-    Checkbox,
-    Typography,
-    List,
-    ListItem,
-    ListItemText,
-    ListItemSecondaryAction,
-    IconButton,
-} from '@mui/material'
-import { Delete } from '@mui/icons-material'
+import { Button, TextField, List } from '@mui/material'
+import TodoListItem from '@/components/todolist/TodoListItem'
 
 const TodoList: React.FC = () => {
     const [newTodo, setNewTodo] = useState('')
@@ -72,25 +62,12 @@ const TodoList: React.FC = () => {
             </div>
             <List>
                 {todos.map((todo) => (
-                    <ListItem key={todo.id}>
-                        <Checkbox checked={todo.completed} onChange={() => handleToggleTodo(todo.id)} />
-                        <ListItemText
-                            primary={
-                                <Typography
-                                    variant="body1"
-                                    style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
-                                >
-                                    {todo.name}
-                                </Typography>
-                            }
-                            secondary={todo.description}
-                        />
-                        <ListItemSecondaryAction>
-                            <IconButton edge="end" aria-label="delete" onClick={() => handleRemoveTodo(todo.id)}>
-                                <Delete />
-                            </IconButton>
-                        </ListItemSecondaryAction>
-                    </ListItem>
+                    <TodoListItem
+                        key={todo.id}
+                        todo={todo}
+                        onToggle={() => handleToggleTodo(todo.id)}
+                        onRemove={() => handleRemoveTodo(todo.id)}
+                    />
                 ))}
             </List>
         </div>
